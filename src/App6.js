@@ -4,10 +4,11 @@ import React, { Component } from "react";
 //   take the advantage the help of the editor
 // - the extension has to be module.css
 
-import classes from "./App5B.module.css";
-import Person from "./Person5B/Person";
+import classes from "./App6.module.css";
+import Person from "./Person6/Person";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
-class App5B extends Component {
+class App6 extends Component {
   state = {
     persons: [
       { id: 1, name: "Steven", age: 52 },
@@ -57,13 +58,21 @@ class App5B extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
+              // - Error boundary only works in prod mode
+              // - "key" needs to be set on the outermost component;
+              //    move it up from Person to ErrorBoundary
+              // - Use error boundary with discretion – only in the case
+              //   where a component is excepted to throw errors unpredictably.
+              //   Don’t clutter your code with error boundary.
+              // - error boundary only works in prod mode
+              <ErrorBoundary key={person.id}>
+                <Person
+                  click={() => this.deletePersonHandler(index)}
+                  name={person.name}
+                  age={person.age}
+                  changed={(event) => this.nameChangedHandler(event, person.id)}
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
@@ -95,4 +104,4 @@ class App5B extends Component {
   }
 }
 
-export default App5B;
+export default App6;

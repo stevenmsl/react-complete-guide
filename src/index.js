@@ -5,12 +5,13 @@ import "./index.css";
 // import App4 from "./App4";
 // import App5 from "./App5";
 // import App5A from "./App5A";
-import App5B from "./App5B";
+// import App5B from "./App5B";
+import App6 from "./App6";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App5B />
+    <App6 />
   </React.StrictMode>,
   document.getElementById("root")
 );
